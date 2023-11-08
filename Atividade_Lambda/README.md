@@ -74,7 +74,7 @@ Output:
 Cenário 3:
 <br>
 <br>
-Senha incorreta
+Senha correta
 <br>
 Requisição incorreta
 <br>
