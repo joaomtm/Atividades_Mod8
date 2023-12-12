@@ -1,128 +1,37 @@
-# Atividades ETL
+# Atividades Data Visualization
 
-O objetivo desta atividade é criar uma ETL em flask com teste de integração que leia da API OpenWeather, manipulando os dados em uma tabela nova guardando as informações em 4 colunas: Data da Ingestão, Tipo, Valores, Uso.
+O objetivo desta atividade é criar um data visualization com alguma ferramenta entre: Metabase, Grafana ou PowerBI
 
-## Organização dos Arquivos
+## Escolha e justificativa da ferramenta
+A ferramenta escolhida para a visualização foi o Power BI, da Microsoft. O primeiro motivo para essa escolha foi a fácil interação com arquivos Excel (formato em que os dados a serem manipulados estavam), sendo extremamente fácil e indicativa a importação e manipulação de dados nesse formato (.xlsx) na ferramenta. O segundo motivo é a fácil interface para criação de views: ao contrários de outras ferramentas, não é necessário manipular dados em "linguagem" SQL, basta arrastar diretórios e marcar checkboxes, uma interface bem familiar presente nos aplicativos do pacote Office. O terceiro e último motivo é a profundidade de interações que as views no Power BI permitem.
 
-A solução consiste em três arquivos principais:
-<br>
-<br>
-<strong>app.py:</strong> este é o arquivo principal (formato python), ele conterá todas as funções de coleta, criação e ingestão de dados. Nele também estará as configurações de servidor/rotas. Aqui, toda a aplicação será feita.
-<br>
-<br>
-<strong>dados_armaz.db:</strong> este é o arquivo da base de dados, é nele que ficará armazenado todos os dados coletados pela solução.
-<br>
-<br>
-<strong>test_api.py:</strong> este é o arquivo de testes, ele verificará se todas as funções em "app.py" estão funcionando corretamente.
-<br>
-<br>
-Os outros arquivos são referentes a cache (do pytest e arquivo python)
-<br>
-<br>
+![apps 9729 14405452487353876 a6612b1c-3bfc-46da-ad7e-0dd83b65757d](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/a4a81e1a-88d8-4695-ad27-816da64cd27c)
 
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/3de955d5-27aa-4d96-828a-a3589f451dc4)
+## Importação de dados
+Logo que o Power BI for aberto, basta fazer uma busca do arquivo a ser manipulado em sua máquina local. Feito isso, as colunas presentes nos dados já estarão organizadas para gerar as views.
 
-## app.py, centro da solução
+![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/4d8a138b-ac02-4ab3-a705-64daa6c6d720)
 
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/57a13fde-1cb3-4e9e-b694-9db5f03e465d)
-<br>
-Primeiro, é necessário importar as bibliotecas referentes à micro biblioteca flask, formas de armazenamento e transferência de dados e outras extensões python.
-<br>
+## Visualização de Dados
 
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/f9b2b69b-3568-4c0f-964c-a1934ca9f135)
-
-Criação do ambiente web em flask e definição de lista de elementos a serem requeridos.
-<br>
-
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/0531c375-e12b-48c6-8edc-8a95adcddbf9)
-
-Definição de função para coletar dados do tempo das cidades indicadas na lista
-<br>
-
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/e3c62c4a-97f9-4851-8818-b4cfaecafde2)
-<br>
-Função para a criar uma tabela e organiza-la com base nos dados coletados
-<br>
-
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/baf1dbd6-1cfe-468f-a419-0e20d44dbfe0)
-<br>
-Conexão da tabela gerada com o banco de dados (função)
-<br>
-
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/33696b1b-728d-4573-ab51-f4c8421caf04)
-<br>
-Definição das rotas em Flask, uma para confirmar o funcionamento do flask, outra para o funcionamento do ETL, e, por último, a rota personalizada da solução.
-<br>
-
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/f6de8932-8812-484b-ba2c-22d7a37972a4)
-<br>
-Essa parte verifica se o script Python está sendo executado como o programa principal para, assim, iniciar o host da página.
+A base de dados escolhida para desenvolver as views foi a "restricao_produtos_servicos_saude" do conjunto da POF. Essa base explora detalhes sobre a restrição à serviços e produtos ao longo do país.
 <br>
 <br>
-Para executar o código da solução, escreva em seu terminal:
+A primeira view desenvolvida utiliza como base a estrutura de gráfico de pizza, comparando numericamente a incidência de casos de restrição de serviços e produtos na região urbana e rural no Brasil.
 <br>
-```
-python app.py
-```
+![BI 1](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/218deb01-1a52-4cb2-8ccb-5b5efbeb7a39)
 <br>
-
-Essa mensagem deverá aparecer em seu terminal
-<br>
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/b2283c90-0f7f-4c41-9f16-332867847787)
+Analisando o gráfico, é possível observar que proporcionalmente a região rural do Brasil sofre mais pela falta de acesso à produtos e serviços (a falta de acesso representa cerca de 25%, sendo que a população rural representa apenas 15,6% conforme o IBGE de 2010). Contudo, em números absolutos, a região urbana ainda sofre mais por essa falta de acesso.
 <br>
 <br>
-Acesse o endereço do servidor indicado
+A segunda view desenvolvida utiliza como base a estrutura de gráfico de colunas, comparando numericamente a incidência de casos de restrição de serviços e produtos por cada estado brasileiro.
 <br>
-adicione "/clima" na url para verificar se os dados estão sendo coletados de fato. A tela a seguir deve aparecer em seu navegador:
-
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/b7f9baaf-5110-4a14-adc9-c126e9db0efd)
+![BI 4](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/72a27bff-d767-4792-99e1-3ea8723aee88)
 <br>
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/a80b04c0-1df0-4790-9b03-2c366b257f51)
-<br>
-A base de dados também deverá aparecer na sua pasta de arquivos, já com os dados coletados.
+Analisando o gráfico, é possível observar que o Rio Grande do Sul é o que mais sofre de acesso a produtos e serviços, seguido de três estados do Nordeste (Bahia, Pernambuco, Maranhão). O primeiro estado possivelmente sofre por sua geolocalização, os outros por possíveis problemas de pobreza. 
 <br>
 <br>
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/1f773f1f-4c5a-4226-a5dd-8a0525798af0)
-<br>
-Você pode verificar diretamente pelo DB Browser se os dados foram de fato ingeridos.
-<br>
-<br>
-## test_api.py, testes da aplicação
-
-A partir do pytest, uma função de teste foi construída para cada função construída anteriormente. Todas possuem o prefixo "test_" acompanhada do nome da função que está sendo testada.
-<br>
-<br>
-<strong>Exemplo de Função Teste</strong>
-<br>
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/06fe74dd-2bbb-4e8d-9355-b79f5f3716a4)
-
-<br>
-Para executar o código de teste, escreva em seu terminal:
-<br>
-
-```
-pytest test_api.py
-```
-
-<br>
-Caso dê certo, a seguinte mensagem aparecerá em seu terminal:
-
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/42a8fe24-8067-4e4a-9d12-2fdf335acdf1)
-
-<br>
-Cada pontinho verde indica o sucesso do teste da função, totalizando 6 testes bem sucedidos (100%) 
-<br>
-<br>
-Caso uma função esteja com algum erro, ou se sua aplicação não for bem sucedida, um alerta será indicado em respectivo:
-<br>
-
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/8400fde4-0a8d-4c46-bef1-027053553aba)
-
-![image](https://github.com/joaomtm/Atividades_Mod8/assets/99208815/587cbb32-5f21-4311-b847-b5f24924d61a)
-
-<br>
-
-Neste caso, o primeiro e último testes deram erro por conta da lista das cidades (lista_cidades).
+Diante dessas views, é possível perceber quais mercados regionais estão mais aquecidos e quais ainda não foram explorados, tudo isso com base na capacidade de acesso a serviços e produtos da população brasileira.
 
 
 
